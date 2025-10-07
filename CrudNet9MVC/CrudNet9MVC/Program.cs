@@ -1,4 +1,10 @@
+//ESTE FUE CREADO Y ES APPLICATIONDB CONTENXT
+using CrudNet9MVC.Data;
+using Microsoft.EntityFrameworkCore; 
+
 var builder = WebApplication.CreateBuilder(args);
+//CONFIGURACION DE DB contenedor de dependencias
+builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConexionSql"))); //UTILIZADO EN TODA LA APP
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
