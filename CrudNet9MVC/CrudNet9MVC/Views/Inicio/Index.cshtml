@@ -3,7 +3,7 @@
     ViewData["Title"] = "Pagina de Contactos";
 }
 
-<h1 class="text-center">Contacto con .NET 9 (CORE)</h1>
+<h1 class="text-center font-monospace fw-bold text-dark">Contacto con .NET 9 (CORE)</h1>
 <div class="row">
     <div class="offset-9 col-3 mb-3">
         <a asp-action="Crear" asp-controller="Inicio" class="btn btn-sm btn-success d-block m-xl-auto ">
@@ -21,7 +21,7 @@
                 <div class="table-responsive" >
                     @if(Model.Count() > 0)
                     {
-                        <table class="table table-bordered" id="tblUsuarios" width="100%" cellspacing="0">
+                        <table class="table " id="tblUsuarios" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>@Html.DisplayNameFor(m => m.Id)</th>
