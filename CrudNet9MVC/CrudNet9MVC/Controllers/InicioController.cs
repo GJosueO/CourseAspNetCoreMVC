@@ -15,12 +15,26 @@ namespace CrudNet9MVC.Controllers
         {
             _context = context; //Accedemos al contexto
         }
-
+        [HttpGet]
         public async Task<IActionResult> Index() //agregamos el metodo async 
         {
             return View(await _context.ModeloContacto.ToListAsync()); // Accedemos al modelo, mandar los registros de bd a una lista
         }
+        [HttpGet]
+        public IActionResult Crear()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Crear(Contacto contacto)
+        {
+            if (ModelState.IsValid)
+            {
 
+            }
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
