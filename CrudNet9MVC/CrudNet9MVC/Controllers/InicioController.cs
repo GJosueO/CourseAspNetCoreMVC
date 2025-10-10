@@ -1,0 +1,35 @@
+using System.Diagnostics;
+using CrudNet9MVC.Data;
+using CrudNet9MVC.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace CrudNet9MVC.Controllers
+{
+    public class InicioController : Controller
+    {
+        //Podremos llamar los modelos de ApplicationDBCOntext
+        private readonly ApplicationDBContext _context;
+
+        public InicioController(ApplicationDBContext context)
+        {
+            _context = context; //Accedemos al contexto
+        }
+
+        public async Task<IActionResult> Index() //agregamos el metodo async 
+        {
+            return View(await _context.ModeloContacto.ToListAsync()); // Accedemos al modelo, mandar los registros de bd a una lista
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+}

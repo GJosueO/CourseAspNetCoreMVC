@@ -1,0 +1,74 @@
+﻿@model IEnumerable<CrudNet9MVC.Models.Contacto>
+@{
+    ViewData["Title"] = "Pagina de Contactos";
+}
+
+<h1 class="text-center">Contacto con .NET 9 (CORE)</h1>
+<div class="row">
+    <div class="offset-9 col-3 mb-3">
+        <a asp-action="Crear" asp-controller="Inicio" class="btn btn-sm btn-success d-block m-xl-auto ">
+            <i class="fa fa-plus-circle" aria-hidden="true"> </i> Agregar
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-light fw-bold"> Lista de usuarios.</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive" >
+                    @if(Model.Count() > 0)
+                    {
+                        <table class="table table-bordered" id="tblUsuarios" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(m => m.Id)</th>
+                                    <th>@Html.DisplayNameFor(m => m.Nombre)</th>
+                                    <th>@Html.DisplayNameFor(m => m.Telefono)</th>
+                                    <th>@Html.DisplayNameFor(m => m.Celular)</th>
+                                    <th>@Html.DisplayNameFor(m => m.Email)</th>
+                                    <th>@Html.DisplayNameFor(m => m.FechaCreacion)</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var item in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(m => item.Id)</td>
+                                        <td>@Html.DisplayFor(m => item.Nombre)</td>
+                                        <td>@Html.DisplayFor(m => item.Telefono)</td>
+                                        <td>@Html.DisplayFor(m => item.Celular)</td>
+                                        <td>@Html.DisplayFor(m => item.Email)</td>
+                                        <td>@Html.DisplayFor(m => item.FechaCreacion)</td>
+                                        <td>
+                                            <a class="btn btn-sm btn-warning text-white" asp-action="Editar" asp-route-id="@item.Id">
+                                                <i class="fa fa-pencil-square" aria-hidden="true"> </i> Editar
+                                            </a>
+                                            <a class="btn btn-sm btn-secondary " asp-action="Detalle" asp-route-id="@item.Id">
+                                                <i class="fa fa-align-right" aria-hidden="true"> </i> Detalle
+                                            </a>
+                                            <a class="btn btn-sm btn-danger " asp-action="Eliminar" asp-route-id="@item.Id">
+                                                <i class="fa fa-trash" aria-hidden="true"> </i> Eliminar
+                                            </a>
+                                            <a class="btn btn-sm btn-success " asp-action="Crear" >
+                                                <i class="fa fa-address-card" aria-hidden="true"> </i> Crear
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p class="bg-light text-warning fw-bold text-center rounded py-3 border"> 😒 No hay registros</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
