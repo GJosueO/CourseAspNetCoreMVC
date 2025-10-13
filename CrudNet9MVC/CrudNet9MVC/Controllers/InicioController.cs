@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Threading.Tasks;
 using CrudNet9MVC.Data;
 using CrudNet9MVC.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -27,11 +28,14 @@ namespace CrudNet9MVC.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Crear(Contacto contacto)
+        public async Task<IActionResult> Crear(Contacto contacto)
         {
             if (ModelState.IsValid)
             {
-
+                contacto.FechaCreacion = DateTime.Now;
+                _context.ModeloContacto.Add(contacto); //Agregar el contacto a la bd informacion
+                await _context.SaveChangesAsync(); //Guardar los cambios conectamos con la bd
+                return RedirectToAction(nameof(Index)); //Redireccionar al metodo Index
             }
             return View();
         }
