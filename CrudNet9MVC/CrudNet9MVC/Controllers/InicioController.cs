@@ -40,16 +40,6 @@ namespace CrudNet9MVC.Controllers
             }
             return View();
         }
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
 
         //METODO PARA VALIDAR REGISTRO DE VISTA EDITAR
         [HttpGet]//METODO PARA obtener         
@@ -80,6 +70,16 @@ namespace CrudNet9MVC.Controllers
                 return RedirectToAction(nameof(Index)); //Redireccionar al metodo Index
             }
             return View();
+        }
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
        
