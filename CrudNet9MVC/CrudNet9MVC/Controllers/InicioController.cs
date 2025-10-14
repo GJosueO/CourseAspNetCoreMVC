@@ -26,8 +26,9 @@ namespace CrudNet9MVC.Controllers
         {
             return View();
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+
+        [HttpPost] //METODO PARA CREAR DATOS
+        [ValidateAntiForgeryToken] // Evitar ataques DE tipo CSRF
         public async Task<IActionResult> Crear(Contacto contacto)
         {
             if (ModelState.IsValid)
@@ -49,5 +50,38 @@ namespace CrudNet9MVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        //METODO PARA VALIDAR REGISTRO DE VISTA EDITAR
+        [HttpGet]//METODO PARA obtener         
+        public IActionResult Editar(int? id)
+        {
+            if(id== null)
+            {
+                return NotFound();
+            }
+            var contacto = _context.ModeloContacto.Find(id);
+            if(contacto == null)
+            {
+                return NotFound();
+            }
+            return View(contacto);
+        }
+
+        // METODO PARA ACTUALIZAR
+        [HttpPost] // METODO PARA EDITAR 
+        [ValidateAntiForgeryToken] // Evitar ataques CSRF
+        public async Task<IActionResult> Editar(Contacto contacto)
+        {
+            if (ModelState.IsValid) //VALIDACION DE DATOS ( MODELO CAMPOS NO NULOS)
+            {
+                contacto.FechaCreacion = DateTime.Now; //Actualizar la fecha de creacion YA QUE NO HAY FECHA DE ACTUALIZACION
+                _context.Update(contacto); //Actualizar el contacto
+                await _context.SaveChangesAsync(); //Guardar los cambios
+                return RedirectToAction(nameof(Index)); //Redireccionar al metodo Index
+            }
+            return View();
+        }
+
+       
     }
 }
