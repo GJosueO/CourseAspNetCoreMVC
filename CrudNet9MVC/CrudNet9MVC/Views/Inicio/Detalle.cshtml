@@ -1,0 +1,25 @@
+﻿@model CrudNet9MVC.Models.Contacto
+@{
+    ViewData["Title"] = "Vista de Detalle";
+}
+<h1 class="text-center fw-bold text-dark">Crear Contacto</h1>
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-light fw-bold"> Crear usuario</h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Id: </strong>@Html.DisplayFor(m => m.Id)</li>
+                    <li class="list-group-item"><strong>Nombre: </strong>@Html.DisplayFor(m => m.Nombre)</li>
+                    <li class="list-group-item"><strong>Telefono: </strong>@Html.DisplayFor(m => m.Telefono)</li>
+                    <li class="list-group-item"><strong>Celular: </strong>@Html.DisplayFor(m => m.Celular)</li>
+                    <li class="list-group-item"><strong>Email: </strong>@Html.DisplayFor(m => m.Email)</li>
+                    <li class="list-group-item"><strong>FechaCreacion: </strong>@Html.DisplayFor(m => m.FechaCreacion)</li>
+                </ul>
+                <a asp-controller="Inicio" asp-action="Index" class="link-light btn btn-sm btn-dark">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -71,6 +71,53 @@ namespace CrudNet9MVC.Controllers
             }
             return View();
         }
+        // VISUALIZAR DETALLE DE REGISTRO
+        [HttpGet]
+        public IActionResult Detalle(int? id)
+        {
+            if(id == null) // VERIFICAR EXISTENCIA DE ID
+            {
+                return NotFound();
+            }
+            var contacto = _context.ModeloContacto.Find(id); // INFORMACION DEL CONTACTO ESTE DISPONIBLE
+            if(contacto == null)
+            {
+                return NotFound();
+            }
+            return View(contacto); // RETORNAR LA VISTA CON INFORMACION
+        }
+
+        [HttpGet]
+        public IActionResult Eliminar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var contacto = _context.ModeloContacto.Find(id);
+            if(contacto == null)
+            {
+                return NotFound();
+            }
+            return View(contacto);
+        }
+
+        [HttpPost, ActionName("Eliminar")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EliminarContacto(int? id)
+        { 
+            var contacto = await _context.ModeloContacto.FindAsync(id);
+            if(contacto == null)
+            {
+                return View();
+            }
+            //Eliminar
+            _context.ModeloContacto.Remove(contacto);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+        
         public IActionResult Privacy()
         {
             return View();

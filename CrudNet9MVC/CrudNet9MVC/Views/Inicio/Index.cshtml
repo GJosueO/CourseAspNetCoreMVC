@@ -23,26 +23,18 @@
                     {
                         <table class="table " id="tblUsuarios" width="100%" cellspacing="0">
                             <thead>
-                                <tr>
-                                    <th>@Html.DisplayNameFor(m => m.Id)</th>
-                                    <th>@Html.DisplayNameFor(m => m.Nombre)</th>
-                                    <th>@Html.DisplayNameFor(m => m.Telefono)</th>
-                                    <th>@Html.DisplayNameFor(m => m.Celular)</th>
-                                    <th>@Html.DisplayNameFor(m => m.Email)</th>
-                                    <th>@Html.DisplayNameFor(m => m.FechaCreacion)</th>
+                                <tr>                                    
+                                    <th>@Html.DisplayNameFor(m => m.Nombre)</th>                                   
+                                    <th>@Html.DisplayNameFor(m => m.Email)</th>                                    
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach(var item in Model)
                                 {
-                                    <tr>
-                                        <td>@Html.DisplayFor(m => item.Id)</td>
-                                        <td>@Html.DisplayFor(m => item.Nombre)</td>
-                                        <td>@Html.DisplayFor(m => item.Telefono)</td>
-                                        <td>@Html.DisplayFor(m => item.Celular)</td>
-                                        <td>@Html.DisplayFor(m => item.Email)</td>
-                                        <td>@Html.DisplayFor(m => item.FechaCreacion)</td>
+                                    <tr>                                        
+                                        <td>@Html.DisplayFor(m => item.Nombre)</td>                                       
+                                        <td>@Html.DisplayFor(m => item.Email)</td>                                       
                                         <td>
                                             <a class="btn btn-sm btn-warning text-white" asp-action="Editar" asp-route-id="@item.Id">
                                                 <i class="fa fa-pencil-square" aria-hidden="true"> </i> Editar
@@ -52,11 +44,7 @@
                                             </a>
                                             <a class="btn btn-sm btn-danger " asp-action="Eliminar" asp-route-id="@item.Id">
                                                 <i class="fa fa-trash" aria-hidden="true"> </i> Eliminar
-                                            </a>
-                                            <a class="btn btn-sm btn-success " asp-action="Crear" >
-                                                <i class="fa fa-address-card" aria-hidden="true"> </i> Crear
-                                            </a>
-
+                                            </a>                                           
                                         </td>
                                     </tr>
                                 }
