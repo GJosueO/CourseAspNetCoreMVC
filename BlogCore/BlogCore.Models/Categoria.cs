@@ -9,12 +9,12 @@ namespace BlogCore.Models
 {
     public class Categoria
     {
-        [Key]
+        [Key] // PERMITE IDENTIFICAR LLAVE PRIMARIA
         public int Id { get; set; }
-        [Required(ErrorMessage = "El nombre de la categoria es obligatorio")]
-        [Display(Name = "Nombre de categoria")]
+        [Required(ErrorMessage = "El nombre de la categoria es obligatorio")] //MENSAJE DE ERROR
+        [Display(Name = "Nombre de categoria")] // NOMBRE DE NUESTRO CAMPO A MOSTRAR AL USUARIO
         public string Nombre { get; set; }
         [Display(Name = "Orden de visualizacion")]
-        public int? Orden { get; set; }
+        public int? Orden { get; set; } // CAMPO OPCIONAL
     }
 }
