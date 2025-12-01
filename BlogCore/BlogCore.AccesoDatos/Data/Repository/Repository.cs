@@ -30,25 +30,60 @@ namespace BlogCore.AccesoDatos.Data.Repository
         {
             return dbSet.Find(id); // UTILIZAMOS EL METODO FIND DEL DBSET PARA OBTENER LA ENTIDAD POR SU ID
         }
-
+        //RECOPILAR UNA COLECION DE ENTIDADES QUE CUMPLAN CON CRITERIOS ESPECIFICOS
         public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, Func<IQueryable<T>, IOrderedQueryable<T>>? orderyBy = null, string? includeProperties = null)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = dbSet; // se crea una consulta base utilizando el DbSet de la entidad T si se esta ejecutando categorias me va a traer todas las categorias, si productos todas los productos
+            if(filter != null)
+            {
+                query = query.Where(filter);//se aplica el filtro a la consulta si se proporciona uno // guardara en query solo los elementos que cumplan con el filtro
+            }
+            if(includeProperties != null)
+            {
+                foreach(var includeProperty in includeProperties.Split( new char[] { ','}, StringSplitOptions.RemoveEmptyEntries))// se divide la cadena de propiedades relacionadas en una matriz utilizando la coma como separador y se itera sobre cada propiedad relacionada
+                {
+                    query = query.Include(includeProperty);// se incluyen las propiedades relacionadas especificadas en la consulta
+                }
+            }
+            // Se aplica el ordenamiento si se proporciona una funcion 
+            if (orderyBy != null)
+            {
+                return orderyBy(query).ToList();// se aplica la funcion de ordenamiento a la consulta y se convierte a una lista antes de devolver los resultados
+            }
+            return query.ToList();// si no se proporciona una funcion de ordenamiento, se convierte la consulta a una lista y se devuelven los resultados tal cual
+
         }
 
         public T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = dbSet; // se crea una consulta base utilizando el DbSet de la entidad T
+            // se aplica el filtro a la consulta si se proporciona uno
+            if(filter != null)
+            {
+                query = query.Where(filter);// se guarda en query solo los elementos que cumplan con el filtro
+            }
+            // se incluyen propiedades de navegacion si se proporcionan
+            if (includeProperties != null)
+            {
+                foreach(var includeProperty in includeProperties.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+
+            return query.FirstOrDefault();// se devuelve la primera entidad que cumple con los criterios especificados o el valor predeterminado si no se encuentra ninguna
         }
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            T entityToRemove = dbSet.Find(id); // se busca la entidad en el DbSet utilizando el ID proporcionado
         }
 
         public void Remove(T entity)
         {
-            throw new NotImplementedException();
+            dbSet.Remove(entity); // se elimina la entidad especificada del DbSet
         }
+
+        // EL REPOSITORIO GENERICO PROPORCIONA UNA IMPLEMENTACION REUTILIZABLE DE LAS OPERACIONES COMUNES DE ACCESO A DATOS DONDE SE PUEDEN REALIZAR OPERACIONES CRUD BASICAS EN CUALQUIER ENTIDAD DEL MODELO DE DATOS,PERMITE UNA MAYOR CONSISTENCIA Y REDUCCION DE CODIGO DUPLICADO EN LA CAPA DE ACCESO A DATOS DE LA APLICACION.
     }
 }
