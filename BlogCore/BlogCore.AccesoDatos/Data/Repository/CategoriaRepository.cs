@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlogCore.AccesoDatos.Data.Repository
 {
-    internal class CategoriaRepository : Repository<Categoria>, ICategoriaRepository
+    public class CategoriaRepository : Repository<Categoria>, ICategoriaRepository
     {
         private readonly ApplicationDbContext _db;
 
@@ -17,6 +17,12 @@ namespace BlogCore.AccesoDatos.Data.Repository
         {
             _db = db;
         }
+
+        public IEnumerable<Categoria> GetAllCategoriasOrdenadas()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Categoria categoria) // Solo se crea un metodo Update en el repositorio de Categoria porque es una operacion especifica que no esta cubierta por los metodos genericos del repositorio base
         {
             var objDesdeDb = _db.Categoria.FirstOrDefault(s => s.Id == categoria.Id);// BUSCAMOS LA CATEGORIA EN LA BASE DE DATOS UTILIZANDO SU ID
