@@ -1,10 +1,11 @@
 using BlogCore.Data;
+using BlogCore.AccesoDatos.Data; // AÑADIMOS ESTA LINEA PARA ACCEDER A LA CLASE DE ACCESODATOS
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container. // CAMBIAMOS LA VARIABLE DE NUESTRA CONEXION: ConexionSQL YA QUE ESTABA APUNTADO POR DEFECTO
+// Add services to the container. // CAMBIAMOS LA VARIABLE DE NUESTRA CONEXION: ConexionSQL YA QUE ESTABA APUNTADO POR DEFECTO // proveniente de appsettings.json
 var connectionString = builder.Configuration.GetConnectionString("ConexionSQL") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
