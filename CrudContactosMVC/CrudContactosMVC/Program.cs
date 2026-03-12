@@ -1,9 +1,9 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 // Leer cadena de conexion 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// Add services to the container.
+builder.Services.AddControllersWithViews();
 //builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConexionSql"))); //UTILIZADO EN TODA LA APP
 var app = builder.Build();
 
