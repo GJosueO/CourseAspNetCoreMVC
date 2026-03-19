@@ -1,7 +1,18 @@
+using CrudContactosMVC.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Leer cadena de conexion 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// Leer cadena de conexion 1er paso creacion de conexion.
+//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// Registrar DbContext para inyeccion de dependencias 2do paso configuracion de inyeccion de dependencias
+builder.Services.AddDbContext<ApplicationDBContext>(options =>
+options.UseSqlServer( 
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    )
+); // scoped actua de esa manera y esta disponible para toda la aplicacion, lo cual es recomendable solo utilizar una sola.
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 //builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConexionSql"))); //UTILIZADO EN TODA LA APP
