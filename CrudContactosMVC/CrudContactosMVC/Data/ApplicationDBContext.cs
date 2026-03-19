@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CrudContactosMVC.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CrudContactosMVC.Data
 {
@@ -11,5 +12,6 @@ namespace CrudContactosMVC.Data
         }
 
         // DBSets
+        public DbSet<Contacto> Contactos { get; set; } // DbSet es una clase que representa una coleccion de entidades en la base de datos, en este caso Contactos es el nombre de la tabla y Contacto es el modelo que representa cada registro de la tabla
     }
 }
