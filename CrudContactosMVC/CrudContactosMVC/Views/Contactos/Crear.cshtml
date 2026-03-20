@@ -1,0 +1,32 @@
+﻿@model CrudContactosMVC.Models.Contacto;
+@{
+    ViewData["Title"] = "Crear Contacto";
+}
+<h1 class="text-center fw-semibold text-dark">Creación de Contactos</h1>
+<hr class="border"/>
+<form asp-action="Crear" method="POST">
+    <div asp-validation-summary="ModelOnly" class="text-danger"> <!-- El asp-validation-summary permite hacer una sumatoria de las validaciones que no pasaron si hubo campos vacios que no fueron llenados -->
+    </div> 
+        <div class="mb-3">
+            <label asp-for="Nombre"class="form-label"></label> <!-- TRAERNOS EL ENCABEZADO DEL MODELO-->
+            <input asp-for="Nombre" class="form-control" placeholder="Ingresa el nombre."/> <!-- LA INFORMACION QUE SI INGRESARA SE ESTARA ALMACENANDO EN EL CAMPO NOMBRE-->
+            <span asp-validation-for="Nombre" class="text-danger"></span> <!-- ASP-VALIDATION-FORM VALIDARA NUESTRO CAMPO NOMBRE Y SI HA ERROR, EL MENSAJE DE LOS ANOTTATIONS SERA MOSTRADO -->
+        </div>
+        <div class="mb-3">
+            <label asp-for="Correo" class="form-label"></label> <!-- TRAERNOS EL ENCABEZADO DEL MODELO-->
+            <input asp-for="Correo" class="form-control" placeholder="Ingresa el correo."/> <!-- LA INFORMACION QUE SI INGRESARA SE ESTARA ALMACENANDO EN EL CAMPO NOMBRE-->
+            <span asp-validation-for="Correo" class="text-danger"></span> <!-- ASP-VALIDATION-FORM VALIDARA NUESTRO CAMPO NOMBRE Y SI HA ERROR, EL MENSAJE DE LOS ANOTTATIONS SERA MOSTRADO -->
+        </div>
+        <div class="mb-3">
+            <label asp-for="Telefono" class="form-label"></label> <!-- TRAERNOS EL ENCABEZADO DEL MODELO-->
+            <input asp-for="Telefono" class="form-control" placeholder="Ingresa el telefono."/> <!-- LA INFORMACION QUE SI INGRESARA SE ESTARA ALMACENANDO EN EL CAMPO NOMBRE-->
+            <span asp-validation-for="Telefono" class="text-danger"></span> <!-- ASP-VALIDATION-FORM VALIDARA NUESTRO CAMPO NOMBRE Y SI HA ERROR, EL MENSAJE DE LOS ANOTTATIONS SERA MOSTRADO -->
+        </div>
+        <div class="mb-3">
+            <label asp-for="Direccion" class="form-label"></label> <!-- TRAERNOS EL ENCABEZADO DEL MODELO-->
+            <input asp-for="Direccion" class="form-control" placeholder="Ingresa la dirección."/> <!-- LA INFORMACION QUE SI INGRESARA SE ESTARA ALMACENANDO EN EL CAMPO NOMBRE-->
+            <span asp-validation-for="Direccion" class="text-danger"></span> <!-- ASP-VALIDATION-FORM VALIDARA NUESTRO CAMPO NOMBRE Y SI HA ERROR, EL MENSAJE DE LOS ANOTTATIONS SERA MOSTRADO -->
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button> <!--ESTE PERMITE EJECUTAR EL ACTION DEL FORM  Y ESTE A SU VEZ PERMITE REALIZAR EL EVENTO DEL ENVIADO DE LA INFORMACION A BASE DATOS-->
+        <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>

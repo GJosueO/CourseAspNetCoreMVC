@@ -20,5 +20,10 @@ namespace CrudContactosMVC.Controllers
             var contactos = await _context.Contactos.ToListAsync();
             return View(contactos);
         }
+        [HttpGet]
+        public IActionResult Crear()
+        {
+            return View();
+        }
     }
 }
