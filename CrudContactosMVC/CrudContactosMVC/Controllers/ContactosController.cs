@@ -87,5 +87,20 @@ namespace CrudContactosMVC.Controllers
         {
             return _context.Contactos.Any(e => e.Id == Id);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Detalles(int? Id)
+        {
+            if(Id == null)
+            {
+                return NotFound();
+            }
+            var contacto = await _context.Contactos.FirstOrDefaultAsync(e => e.Id == Id);
+            if (contacto == null)
+            {
+                return NotFound();
+            }
+            return View(contacto);
+        }
     }
 }

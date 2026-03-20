@@ -1,0 +1,25 @@
+﻿@model CrudContactosMVC.Models.Contacto;
+@{
+    ViewData["Title"] = "Detalles del contacto";
+}
+<h1 class="text-center fw-semibold text-dark">Detalles del Contacto</h1>
+<hr class="border"/>
+<dl class="row">
+    <dt class="col-sm-3">ID</dt>
+    <dd class="col-sm-9">@Model.Id</dd>
+
+    <dt class="col-sm-3">Nombre</dt>
+    <dd class="col-sm-9">@Model.Nombre</dd>    
+    
+    <dt class="col-sm-3">Correo</dt>
+    <dd class="col-sm-9">@Model.Correo</dd>
+    
+    <dt class="col-sm-3">Teléfono</dt>
+    <dd class="col-sm-9">@Model.Telefono</dd>
+
+    <dt class="col-sm-3">Direccion</dt>
+    <dd class="col-sm-9">@Model.Direccion</dd>
+
+</dl>
+    <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-sm btn-warning">Editar</a> <!-- Enlace para editar el contacto -->
+    <a asp-action="Index" class="btn btn-sm btn-secondary">Volver</a> <!-- Enlace para editar el contacto -->
