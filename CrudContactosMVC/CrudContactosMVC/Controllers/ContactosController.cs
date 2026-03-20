@@ -38,5 +38,54 @@ namespace CrudContactosMVC.Controllers
             }
             return View(contacto); // REGRESA AL FORMULARIO (CON VALIDACIONES)
         }
+        [HttpGet]
+        public async Task<IActionResult> Editar(int? Id) // Este metodo permite validar la vista ya que esta sin no contienen un id nos deberia mandar un error (notfound), de lo contrario si el id pertenece a la base de datos retornamos nuestro modelo contactos
+        {
+            if(Id == null)
+            {
+                return NotFound();
+            }
+            var contacto = await _context.Contactos.FindAsync(Id);
+            if (contacto == null)
+            {
+                return NotFound();
+            }
+            return View(contacto);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Editar(int Id, Contacto contacto)
+        {
+            //antes de realizar la validacion del modelo, validamos que el id que regresamos este disponible dentro de un registro del id de la base de datos.
+            if(Id != contacto.Id)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(contacto);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateConcurrencyException) //Estamos desarrollando concurrencia basica (Esto pasa cuando dos usuario editan el mismo y uno guarda antes que el otro) Este detecta conflictos a la hora de guardar el registro, verifica si el registro sigue existiendo en base de datos. "EVITA ERRORES SILENCIOSOS"
+                {
+                    if (!ContactoExist(contacto.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            return View(contacto);
+        }
+        private bool ContactoExist(int Id) //METODO PARA VALIDAR QUE ESE Id este dentro de nuestra base de datos
+        {
+            return _context.Contactos.Any(e => e.Id == Id);
+        }
     }
 }
