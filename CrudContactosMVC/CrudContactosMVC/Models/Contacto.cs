@@ -15,7 +15,7 @@ namespace CrudContactosMVC.Models
         [EmailAddress(ErrorMessage = "El formato del correo no es valido.")]
         [StringLength(150)]
         public string  Correo{ get; set; }
-
+        [Required(ErrorMessage = "El telefono es obligatorio.")]
         [Phone(ErrorMessage = "El formato del telefono no es valido.")]
         [StringLength(20)]
         public string? Telefono { get; set; }
