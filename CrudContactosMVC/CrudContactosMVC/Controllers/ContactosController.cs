@@ -104,7 +104,7 @@ namespace CrudContactosMVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Eliminar(int? Id) 
+        public async Task<IActionResult> Borrar(int? Id) 
         {
             if (Id == null)
             {
@@ -118,10 +118,17 @@ namespace CrudContactosMVC.Controllers
             return View(nameof(Index));
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Eliminar(int Id)
-        {
-
+        [HttpPost]
+        public async Task<IActionResult> Borrar(int Id)
+        {          
+            var contacto = await _context.Contactos.FindAsync(Id);
+            if(contacto != null)
+            {
+                _context.Contactos.Remove(contacto);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+                return RedirectToAction(nameof(Index));                                           
         }
     }
 }
