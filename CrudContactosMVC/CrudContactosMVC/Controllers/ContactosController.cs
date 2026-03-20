@@ -101,6 +101,27 @@ namespace CrudContactosMVC.Controllers
                 return NotFound();
             }
             return View(contacto); //REGRESA LA VISTA CON LOS DETALLES DEL CONTACTO SELECCIONADO.
-        } 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Eliminar(int? Id) 
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+            var contacto = await _context.Contactos.FirstOrDefaultAsync(e => e.Id == Id);
+            if(contacto == null)
+            {
+                return NotFound();
+            }
+            return View(nameof(Index));
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Eliminar(int Id)
+        {
+
+        }
     }
 }
