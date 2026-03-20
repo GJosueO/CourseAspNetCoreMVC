@@ -89,18 +89,18 @@ namespace CrudContactosMVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Detalles(int? Id)
+        public async Task<IActionResult> Detalles(int? Id) //METODO PERMITE VISUALIZAR LOS DETALLES DE UN CONTACTO
         {
-            if(Id == null)
+            if(Id == null) //VALIDAMOS QUE AL REDIGIR A ESTA VISTA SE ENVIE UN ID
             {
                 return NotFound();
             }
-            var contacto = await _context.Contactos.FirstOrDefaultAsync(e => e.Id == Id);
-            if (contacto == null)
+            var contacto = await _context.Contactos.FirstOrDefaultAsync(e => e.Id == Id); //ESTE PERMITE OBTENER EL PRIMER REGISTRO QUE COINCIDA CON EL ID ENVIADO, SI NO SE ENCUENTRA NINGUN REGISTRO DEVUELVE NULL.
+            if (contacto == null) //AQUI SOLO VALIDAMOS QUE EL CONTACTO QUE EXISTIO EN NUESTRA PREVIA VALIDACION , EXISTA EN NUESTRA BASE DE DATOS
             {
                 return NotFound();
             }
-            return View(contacto);
-        }
+            return View(contacto); //REGRESA LA VISTA CON LOS DETALLES DEL CONTACTO SELECCIONADO.
+        } 
     }
 }
