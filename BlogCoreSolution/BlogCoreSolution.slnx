@@ -1,3 +1,6 @@
 <Solution>
   <Project Path="BlogCore/BlogCore.csproj" />
+  <Project Path="BlogCoreSolution.AccesoDatos/BlogCoreSolution.AccesoDatos.csproj" Id="65481f5d-6a08-4a44-9432-f34ba1707f29" />
+  <Project Path="BlogCoreSolution.Models/BlogCoreSolution.Models.csproj" Id="ddb16801-fc1f-47c7-bdbc-8458d31f2ec0" />
+  <Project Path="BlogCoreSolution.Utilidades/BlogCoreSolution.Utilidades.csproj" Id="d43ed0fc-827b-4901-abd1-1130f97fa8a7" />
 </Solution>
