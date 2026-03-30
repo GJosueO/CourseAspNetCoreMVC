@@ -37,7 +37,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Cliente}/{controller=Home}/{action=Index}/{id?}")
+    pattern: "{area=Cliente}/{controller=Home}/{action=Index}/{id?}") //Agregamos el area de cliente para que sea la pagina de inicio y usuarios sin ningun rol definido puedan acceder a esta area
     .WithStaticAssets();
 
 app.MapRazorPages()

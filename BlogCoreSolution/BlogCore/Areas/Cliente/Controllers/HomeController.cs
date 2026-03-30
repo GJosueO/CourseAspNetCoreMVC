@@ -6,7 +6,7 @@ namespace BlogCore.Areas.Cliente.Controllers
 {
     public class HomeController : Controller
     {
-        [Area("Cliente")]
+        [Area("Cliente")] // ESTE ATRIBUTO ES IMPORTANTE PARA INDICAR QUE ESTE CONTROLADOR PERTENECE AL AREA "Cliente"
         public IActionResult Index()
         {
             return View();
