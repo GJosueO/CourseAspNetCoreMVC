@@ -16,4 +16,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BlogCoreSolution.Models\BlogCoreSolution.Models.csproj" />
+    <ProjectReference Include="..\BlogCoreSolution.Utilidades\BlogCoreSolution.Utilidades.csproj" />
+  </ItemGroup>
+
 </Project>

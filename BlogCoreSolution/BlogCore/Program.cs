@@ -1,4 +1,4 @@
-using BlogCore.Data;
+using BlogCoreSolution.AccesoDatos.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
