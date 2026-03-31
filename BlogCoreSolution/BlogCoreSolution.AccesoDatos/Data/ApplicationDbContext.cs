@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogCoreSolution.AccesoDatos.Data
 {
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext(options)
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
+        : IdentityDbContext(options)
     {
     }
+    //IRAN LOS DBSET DE LAS ENTIDADES
 }
