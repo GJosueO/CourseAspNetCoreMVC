@@ -1,0 +1,38 @@
+﻿using BlogCoreSolution.AccesoDatos.Data.Repository.IRepository;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace BlogCoreSolution.AccesoDatos.Data.Repository
+{
+    public class ContenedorTrabajo : IContenedorTrabajo // ESTA CLASE SE ENCARGARA DE IMPLEMENTAR LA INTERFAZ ICONTENEDORTRABAJO, PARA PODER CONTROLAR LOS REPOSITORIOS Y CUANDO SE GUARDAN LOS CAMBIOS EN LA BASE DE DATOS.
+    {
+        private readonly ApplicationDbContext _db;// ESTA VARIABLE SE UTILIZA PARA CONTROLAR LA CONEXION A LA BASE DE DATOS, Y SE INICIALIZA EN EL CONSTRUCTOR DE LA CLASE.
+        public ContenedorTrabajo(ApplicationDbContext db) // ESTE CONSTRUCTOR SE UTILIZA PARA INICIALIZAR LA VARIABLE _DB, Y TAMBIEN PARA INICIALIZAR LOS REPOSITORIOS QUE SE VAYAN CREANDO, EN ESTE CASO SOLO SE INICIALIZA EL REPOSITORIO DE CATEGORIA.
+        {
+            _db = db;
+            Categoria = new CategoriaRepository(_db); // ESTE ES EL CORAZON DE LA UNIDAD DE TRABAJO, AQUI SE INICIALIZA EL REPOSITORIO DE CATEGORIA, Y SE LE PASA LA CONEXION A LA BASE DE DATOS PARA QUE PUEDA REALIZAR LAS OPERACIONES NECESARIAS.
+        }
+        public ICategoriaRepository Categoria { get; private set; } //  ESTA PROPIEDAD SE UTILIZA PARA CONTROLAR EL REPOSITORIO DE CATEGORIA, 
+
+        public void Dispose() // ESTE METODO SE UTILIZA PARA LIBERAR LOS RECURSOS QUE SE ESTAN UTILIZANDO, EN ESTE CASO LA CONEXION A LA BASE DE DATOS, CUANDO YA NO SE NECESITA.
+        {
+            _db.Dispose();
+        }
+
+        public void Save() // ESTE METODO SE UTILIZA PARA GUARDAR LOS CAMBIOS EN LA BASE DE DATOS, CUANDO SE LLAMA A ESTE METODO, SE EJECUTA EL METODO SAVECHANGES DE LA CLASE DBCONTEXT, QUE ES EL QUE SE ENCARGA DE GUARDAR LOS CAMBIOS EN LA BASE DE DATOS.
+        {
+            _db.SaveChanges();
+        }
+
+        // EL FLUJO EN CONCRETO SE CUMPLE VA A IR "CONTROLADOR" > VA A IR A LA INTERFAZ ICONTENEDORTRABAJO > VA A IR AL REPOSITORIO CATEGORIA > VA A IR A LA CLASE CATEGORIA REPOSITORY > VA A IR A LA CLASE DBCONTEXT > VA A IR A LA BASE DE DATOS, Y CUANDO SE LLAME AL METODO SAVE, SE VA A EJECUTAR EL METODO SAVECHANGES DE LA CLASE DBCONTEXT, QUE ES EL QUE SE ENCARGA DE GUARDAR LOS CAMBIOS EN LA BASE DE DATOS.
+    }
+
+    //  IRepository<T> → operaciones genéricas.
+    // ICategoriaRepository → operaciones específicas.
+    // Repository<T> → implementación genérica.
+    // CategoriaRepository → implementación específica.
+    // IContenedorTrabajo → expone repositorios y Save.
+    // ContenedorTrabajo → implementación de unidad de trabajo.
+}
+
