@@ -20,9 +20,13 @@ namespace BlogCore.Areas.Admin.Controllers
         public IActionResult Index() // DEVUELVE LA VISTA PRINCIPAL DE CATEGORIAS
         {
             return View();// DEVUELVE LA VISTA PRINCIPAL
-        } 
+        }
 
-
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
         #region llamadas a la api
         public IActionResult GetAll() // ACCION PARA OBTENER TODAS LAS CATEGORIAS EN FORMATO JSON PARA LA API
         {

@@ -22,12 +22,12 @@ function cargarDataTable() {
             "width" : "40%"
             },
             {
-            "data": "fechaCreacion",
-            "width" : "20%"
-            },
-            {
             "data": "orden",
             "width" : "10%"
+            },
+            {
+            "data": "fechaCreacion",
+            "width" : "20%"
             },
             {
                 "data": "id",
