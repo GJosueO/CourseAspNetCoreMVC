@@ -1,4 +1,5 @@
 ﻿using BlogCoreSolution.AccesoDatos.Data.Repository.IRepository;
+using BlogCoreSolution.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogCore.Areas.Admin.Controllers
@@ -25,6 +26,20 @@ namespace BlogCore.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Categoria categoria)
+        {
+            if (ModelState.IsValid) //PERMITE VALIDAR TODOS LOS DATOS QUE SE ENVIAN DESDE EL FORMULARIO.
+            {
+                //LOGICA PARA CREAR UNA CATEGORIA
+                _contenedorTrabajo.Categoria.Add(categoria); //AGREGA LA CATEGORIA A LA BASE DE DATOS
+                _contenedorTrabajo.Save(); //GUARDA LOS CAMBIOS EN LA BASE DE DATOS
+                return RedirectToAction(nameof(Index)); //REDIRIGE A LA VISTA PRINCIPAL DE CATEGORIAS
+            }
             return View();
         }
         #region llamadas a la api

@@ -35,11 +35,11 @@ function cargarDataTable() {
                     return `
                         <div class="text-center">
                              <a href="/admin/categorias/Edit/${data}" class="btn btn-success text-white" style="cursor:pointer; width:140px;" >
-                                <i class="far fa-edit"></i> Editar
+                                <i class="bi bi-pencil-square"></i> Editar
                              </a>
                                 &nbsp;
                             <a onclick=Delete("/admin/categorias/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer; width:140px;" >
-                                <i class="far fa-trash-alt"></i> Eliminar
+                                <i class="bi bi-trash"></i> Eliminar
                             </a>
                         </div>
                     `;
