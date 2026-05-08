@@ -28,7 +28,17 @@ namespace BlogCore.Areas.Admin.Controllers
         {
             return View();
         }
-
+        [HttpGet]
+        public IActionResult Edit(int Id)
+        {
+            Categoria categoria = new Categoria();
+            categoria = _contenedorTrabajo.Categoria.Get(Id);
+            if(categoria == null)
+            {
+                return NotFound();
+            }
+            return View(categoria);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Categoria categoria)
@@ -42,10 +52,35 @@ namespace BlogCore.Areas.Admin.Controllers
             }
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Categoria categoria)
+        {
+            if (ModelState.IsValid)
+            {
+                _contenedorTrabajo.Categoria.Update(categoria);
+                _contenedorTrabajo.Save();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(categoria);
+        }
         #region llamadas a la api
         public IActionResult GetAll() // ACCION PARA OBTENER TODAS LAS CATEGORIAS EN FORMATO JSON PARA LA API
         {
             return Json(new { data = _contenedorTrabajo.Categoria.GetAll() }); // DEVUELVE LAS CATEGORIAS EN FORMATO JSON este ya esta implementado en el repositorio generico
+        }
+
+        //SWEETALERT 
+        [HttpDelete]
+        public IActionResult Delete(int id) {
+            var objFromDb = _contenedorTrabajo.Categoria.Get(id);
+            if (objFromDb == null)
+            {
+                return Json(new { success = false, message = "Error borrando categoria." });
+            }
+            _contenedorTrabajo.Categoria.Remove(objFromDb);
+            _contenedorTrabajo.Save();
+            return Json(new { success = true, message = $"Categoria borrada correctamente: {objFromDb.Nombre}" });
         }
         #endregion
 
