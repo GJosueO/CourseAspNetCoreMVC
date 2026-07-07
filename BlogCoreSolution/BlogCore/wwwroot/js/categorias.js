@@ -27,7 +27,11 @@ function cargarDataTable() {
             },
             {
             "data": "fechaCreacion",
-            "width" : "20%"
+                "width": "20%",
+                "render": function (data) {
+                    if (!data) return "Fecha no establecida.";
+                    return new Date(data).toLocaleDateString("es-MX");
+                }
             },
             {
                 "data": "id",

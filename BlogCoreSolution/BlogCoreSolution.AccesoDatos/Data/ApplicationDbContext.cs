@@ -14,6 +14,7 @@ namespace BlogCoreSolution.AccesoDatos.Data
 
         //IRAN LOS DBSET DE LAS ENTIDADES
         public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Articulo> Articulos { get; set; }
     }
 
 }
