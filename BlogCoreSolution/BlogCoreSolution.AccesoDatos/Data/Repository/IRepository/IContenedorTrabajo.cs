@@ -10,6 +10,7 @@ namespace BlogCoreSolution.AccesoDatos.Data.Repository.IRepository
         // IProductoRepository Producto { get; }
         // ICategoriaRepository Categoria { get; }
         ICategoriaRepository Categoria { get; } // EL OBJETIVO DE ESTE REPOSITORIO ES CONTROLAR LAS CATEGORIAS DE LOS PRODUCTOS.
+        IArticuloRepository Articulo { get; }
         void Save(); // ESTE METODO SE ENCARGA DE GUARDAR LOS CAMBIOS EN LA BASE DE DATOS
     }// EL OBJETIVO DE LAS UNIDADES DE TRABAJO, ES CENTRALIZAR TODOS LOS REPOSITORIOS, CONTROLAR CUANDO SE GUARDAN LOS CAMBIOS EN LA BASE DE DAT
 }

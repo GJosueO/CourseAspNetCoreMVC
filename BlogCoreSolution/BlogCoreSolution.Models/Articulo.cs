@@ -8,6 +8,10 @@ namespace BlogCoreSolution.Models
 {
     public class Articulo
     {
+        public Articulo()
+        {
+            FechaCreacion = DateTime.Now;
+        }
         [Key]
         public int Id { get; set; }
         [Required(ErrorMessage = "El nombre del articulo es requerido")]
